@@ -1,10 +1,10 @@
 ;#################### Version ###########################
-;The overall version of this "improved" version is 1
+;The overall version of this "improved" version is 1.1
 
 ;#################### General preferences ###############
 G90                                                     ; send absolute coordinates...
 M83                                                     ; ...but relative extruder moves
-M550 P"Troodon V2 Mini"                                       ; set printer name
+M550 P"Troodon V2 Mini"                                 ; set printer name
 M669 K1                                                 ; select CoreXY mode
 
 ;#################### Network ###########################
