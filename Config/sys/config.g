@@ -1,10 +1,10 @@
 ;#################### Version ###########################
-;The overall version of this "improved" version is 1.6.3-1
+;The overall version of this "improved" version is 1
 
 ;#################### General preferences ###############
 G90                                                     ; send absolute coordinates...
 M83                                                     ; ...but relative extruder moves
-M550 P"Troodon 2"                                       ; set printer name
+M550 P"Troodon V2 Mini"                                       ; set printer name
 M669 K1                                                 ; select CoreXY mode
 
 ;#################### Network ###########################
@@ -33,32 +33,33 @@ M569 P5 S0                                              ; physical drive 5 goes 
 M569 P6 S1                                              ; physical drive 6 goes forwards using default driver timings
 M350 X16 Y16 Z16 E16 I1                                 ; configure microstepping with interpolation
 M92 X80.00 Y80.00 Z400.00                               ; set steps per mm
-M92 E417.00                                             ; Stock steps per mm
-;M92 E710.00                                            ; SB steps per mm. Uncomment if using Formbot SB kit and comment out line above
-M566 X600 Y600 Z600 E600                                ; maximum instantaneous speed changes (mm/min) (jerk)
+M92 E719.0693069                                        ; e-steps per mm #reconfigure for your machine
+M566 X300 Y300 Z240 E300                                ; maximum instantaneous speed changes (mm/min) (jerk)
 M203 X30000 Y30000 Z4000 E5000                          ; maximum speeds (mm/min)
-M201 X2000 Y2000 Z650 E3200	                            ; accelerations
+M201 X10000 Y10000 Z4000 E3200	                        ; accelerations
 M906 X1600 Y1600 Z1600 I30                              ; set motor currents (mA) and motor idle factor in per cent
-M906 E640                                               ; Stock motor current
-;M906 E800                                              ; SB Motor Current. Uncomment if using Formbot SB kit and comment out line above
+;M906 E640                                              ; Stock motor current
+M906 E800                                               ; SB Motor Current. Uncomment if using Formbot SB kit and comment out line above
 M84 S30                                                 ; Set idle timeout
+M593 P"zvddd" F62.5								   ; Input Shaping
+M556 S100 X0.635                     ; Skew compensation
 
 ;#################### Axis Limits #######################
-M208 X0 Y2 Z0 S1                                        ; set axis minima
-M208 X355 Y357 Z320 S0                                  ; set axis maxima
-M671 X-50:-50:405:405 Y-75:355:355:-75 S20              ; set gantry pivot points
+M208 X0 Y0 Z0 S1                                        ; set axis minima
+M208 X254 Y255 Z230 S0                                  ; set axis maxima
+M671 X-50:-50:305:305 Y-75:255:255:-75 S20              ; set gantry pivot points
 
 ;#################### Endstops ##########################
 M574 X2 S1 P"xstop"                                     ; configure switch-type (e.g. microswitch) endstop for low end on X via pin xstop
 M574 Y2 S1 P"ystop"                                     ; configure switch-type (e.g. microswitch) endstop for low end on Y via pin ystop
 
 ;#################### Print Head Probe ##################
-M558 K0 P5 C"probe" T12000 F300:120 H10 A10 S0.01       ; configure the probe on the print head
-G31 K0 P500 X0 Y25 Z3                                   ; set Z probe X, Y and Z offsets
-M557 X35:310 Y35:310 S55                                ; define mesh grid
+M558 K0 P5 C"probe" T12000 F900:360 H5 A10 S0.01       ; configure the probe on the print head
+G31 K0 P500 X0 Y0 Z-0.5                                ; set Z probe X, Y and Z offsets
+M557 X5:250 Y5:250 P5                                  ; define mesh grid
 
 ;#################### Nozzle Probe ######################
-M558 K1 P8 C"zstop" T18000 F180 H5 A10 S0.0025 R0       ; configure the probe used by autoz
+M558 K1 P8 C"zstop" T18000 F360 H5 A10 S0.0025 R0       ; configure the probe used by autoz
 G31 K1 P500 X0 Y0 Z3                                    ; set autoZ probe X, Y and Z offsets
 
 ;#################### Heaters ###########################
@@ -67,10 +68,10 @@ M950 H0 C"bed" T0 Q10                                   ; create bed heater outp
 M140 H0                                                 ; map heated bed to heater 0
 M143 H0 S130                                            ; set temperature limit for heater 0 to 125C
 
-M308 S1 P"e0temp" Y"pt1000"                             ; configure sensor 1 as thermistor on pin e0temp
-M950 H1 C"e0heat" T1                                    ; create nozzle heater output on e0heat and map it to sensor 1
-M307 H1 A517.3 C213.3 D11.1 V24 B0                      ; disable bang-bang mode for heater  and set PWM limit
-M143 H1 S460                                            ; set temperature limit for heater 1 to 460C
+M308 S1 P"PF3" Y"thermistor" T100000 B4092			        ; configure sensor 1 as thermistor on pin e0temp
+M950 H1 C"PB9" T1                          				      ; create nozzle heater output on e0heat and map it to sensor 1
+M307 H1 A517.3 C213.3 D11.1 V24 B0       				        ; disable bang-bang mode for heater  and set PWM limit
+M143 H1 S530                              				      ; set temperature limit for heater 1 to 460C
 
 M308 S10 Y"mcu-temp" A"MCU"                           	; defines sensor 10 as MCU temperature sensor
 
