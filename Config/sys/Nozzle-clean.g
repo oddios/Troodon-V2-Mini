@@ -7,14 +7,14 @@ if tools[0].active[0] < {global.nozzleProbeTemperature}         ; check if the h
 if heat.heaters[1].current < tools[0].active[0]
     M116 P0
 G90                                                             ; make sure the printer is set to absolute
-G1 X270 Y356 F6000                                              ; move into position
+G1 X270 Y255 F6000                                              ; move into position
 G1 Z0.5 F3000                                                   ; lower z
-G1 X320 F10000                                                  ; clean the nozzle
-G1 X270 F10000                                                  ; clean the nozzle
-G1 X320 F10000                                                  ; clean the nozzle
-G1 X270 F10000                                                  ; clean the nozzle
-G1 X320 F10000                                                  ; clean the nozzle
-G1 X270 F10000                                                  ; clean the nozzle
+G1 X100 F10000                                                  ; clean the nozzle
+G1 X150 F10000                                                  ; clean the nozzle
+G1 X100 F10000                                                  ; clean the nozzle
+G1 X150 F10000                                                  ; clean the nozzle
+G1 X100 F10000                                                  ; clean the nozzle
+G1 X150 F10000                                                  ; clean the nozzle
 G1 Z10 F6000                                                    ; lift the nozzle
 if var.thisMacroHeatOn = true                                   ; check if the heater temperature was set by this macro
     M568 P0 S0 A0                                               ; turn the hotend off
