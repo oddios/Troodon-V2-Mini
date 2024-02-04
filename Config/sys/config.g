@@ -41,12 +41,12 @@ M906 X1600 Y1600 Z1600 I30                              ; set motor currents (mA
 ;M906 E640                                              ; Stock motor current
 M906 E800                                               ; SB Motor Current. Uncomment if using Formbot SB kit and comment out line above
 M84 S30                                                 ; Set idle timeout
-M593 P"zvddd" F62.5								   ; Input Shaping
-M556 S100 X0.635                     ; Skew compensation
+; M593 P"zvddd" F62.5								                    ; Input Shaping, calibrate for your machine
+; M556 S1 X0.0132055                                    ; Skew compensation, calibrate for your machine !!CHANGE MAXIMA IF USED
 
 ;#################### Axis Limits #######################
 M208 X0 Y0 Z0 S1                                        ; set axis minima
-M208 X254 Y255 Z230 S0                                  ; set axis maxima
+M208 X254 Y255 Z230 S0                                  ; set axis maxima IF !!SKEW COMPENSATION IS USED REDUCE OR CRASHING CAN OCCUR
 M671 X-50:-50:305:305 Y-75:255:255:-75 S20              ; set gantry pivot points
 
 ;#################### Endstops ##########################
