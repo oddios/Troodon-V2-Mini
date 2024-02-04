@@ -7,11 +7,11 @@ if sensors.endstops[1].triggered = true     ; if we're hard against the endstop 
 	M400
 	if sensors.endstops[1].triggered = true
 		abort "Y Endstop appears to be faulty.  Still in triggered state."
-G1 H1 Y355 F6000                            ; move quickly to Y axis endstop and stop there (first pass)
+G1 H1 Y255 F6000                            ; move quickly to Y axis endstop and stop there (first pass)
 if result != 0
 	abort "Print cancelled due error during fast homing"
 G1 Y-5 F6000                                ; go back a few mm
-G1 H1 Y355 F360                             ; move slowly to Y axis endstop once more (second pass)
+G1 H1 Y255 F360                             ; move slowly to Y axis endstop once more (second pass)
 if result != 0
 	abort "Print cancelled due to error during slow homing"
 G1 Y-5 F6000                                ; go back a few mm
