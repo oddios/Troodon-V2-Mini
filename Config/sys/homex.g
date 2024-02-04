@@ -7,11 +7,11 @@ if sensors.endstops[0].triggered = true     ; if we're hard against the endstop 
 	M400
 	if sensors.endstops[0].triggered = true
 		abort "X Endstop appears to be faulty.  Still in triggered state."
-G1 H1 X355 F6000                            ; move quickly to X axis endstop and stop there (first pass)
+G1 H1 X255 F6000                            ; move quickly to X axis endstop and stop there (first pass)
 if result != 0
 	abort "Print cancelled due error during fast homing"
 G1 X-5 F6000                                ; go back a few mm
-G1 H1 X355 F360                             ; move slowly to X axis endstop once more (second pass)
+G1 H1 X255 F360                             ; move slowly to X axis endstop once more (second pass)
 if result != 0
 	abort "Print cancelled due to error during slow homing"
 G1 X-5 F6000                                ; go back a few mm
